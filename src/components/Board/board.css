@@ -1,0 +1,16 @@
+.board{
+    height: 500px;
+    width: 800px;
+    background-color: antiquewhite;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    cursor: crosshair;
+}
+
+.cell{
+    border: 1px solid rgb(86, 99, 106);
+    background-color: rgb(139, 139, 139);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

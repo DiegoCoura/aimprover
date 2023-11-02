@@ -1,0 +1,14 @@
+.ball{
+    border-radius: 50%;
+    box-shadow: 10px 5px 5px rgb(58, 58, 58);
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    background-image: radial-gradient(rgb(15, 209, 253), rgb(50, 149, 236));
+    cursor: crosshair;
+}
+
+.ball:focus,
+.ball:focus-visible {  
+    background-image: radial-gradient(rgb(234, 248, 251), rgb(152, 206, 254));
+}

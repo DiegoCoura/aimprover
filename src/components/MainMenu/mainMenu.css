@@ -1,0 +1,11 @@
+.game-title{
+    font-size: 100px;
+    margin-top: -300px;
+    margin-bottom: 100px;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
