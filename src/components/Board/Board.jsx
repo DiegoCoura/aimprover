@@ -2,46 +2,76 @@ import "./board.css";
 import Ball from "../Ball/Ball";
 import { useState } from "react";
 
-const BOARD_CENTER = 12;
 const BOARD_SIZE = 20;
 
 // eslint-disable-next-line react/prop-types
-export default function Board({currentScore, setCurrentScore}) {
+export default function Board({ currentScore, setCurrentScore }) {
 
-  const [ballPosition, setBallPosition] = useState(BOARD_CENTER)
-  let board = []  
-  
+  let board = [];
 
-  function generateRandomBallPosition(){
-    let prevPosition = ballPosition;
-    
-    let randomNumber = Math.floor((Math.random() * BOARD_SIZE) + 1); 
-      while(randomNumber === prevPosition){
-        randomNumber = Math.floor((Math.random() * BOARD_SIZE) + 1);
+  const [balls, setBalls] = useState([
+    {
+      name: "ball-0",
+      position: generateRandomNumber()
+    },
+    {
+      name: "ball-1",
+      position: generateRandomNumber()
+    },
+    {
+      name: "ball-2",
+      position: generateRandomNumber(),
+    },
+  ]);
+
+
+
+  for (let i = 1; i <= BOARD_SIZE; i++) {
+    board.push(<div key={i} id={i} className={"cell"}></div>);
+  }
+
+  function generateRandomNumber(){
+    let randomNumber = Math.floor(Math.random() * BOARD_SIZE + 1);
+    return randomNumber;
+  }
+
+  function generateRandomBallPosition() {
+    let randomNumber = generateRandomNumber();        
+
+      for (const ball of balls) {
+        while (ball.position === randomNumber) {
+          randomNumber = generateRandomNumber();
+        }
       }
     return randomNumber;
   }
 
-  function onBallClick() {    
-    let newBallPosition = generateRandomBallPosition();    
-    setBallPosition(newBallPosition)
+  balls.forEach((ball, index) => {
+    board[ball.position - 1] = (
+      <div key={ball.position} id={ball.position} className={"cell"}>
+        <Ball index={index} id={ball.name} onBallClick={onBallClick} />
+      </div>
+    );
+  });
+
+  function onBallClick(id) {
+    let newBallPosition = generateRandomBallPosition();
+
+    let boardUpdate = [];
+    for (const ball of balls) {
+      if (ball.name === id) {
+        ball.position = newBallPosition;
+      }
+      boardUpdate.push(ball);
+    }
+    setBalls(() => boardUpdate);
     setCurrentScore(currentScore + 1);
   }
 
-  for (let i = 1; i <= BOARD_SIZE; i++){
-    board.push(
-      <div key={i} id={i} className={'cell ' + i}>{i === ballPosition ? <Ball onBallClick={onBallClick} /> : ""}</div>
-    )
-  }
-  
   return (
     <>
-      <div className="board">
-        {board}
-      </div>
-      <div>
-        Score: {currentScore}
-      </div>
+      <div className="board">{board}</div>
+      <div>Score: {currentScore}</div>
     </>
   );
 }
