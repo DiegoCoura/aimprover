@@ -6,17 +6,16 @@ const BOARD_SIZE = 20;
 
 // eslint-disable-next-line react/prop-types
 export default function Board({ currentScore, setCurrentScore }) {
-
   let board = [];
 
   const [balls, setBalls] = useState([
     {
       name: "ball-0",
-      position: generateRandomNumber()
+      position: generateRandomNumber(),
     },
     {
       name: "ball-1",
-      position: generateRandomNumber()
+      position: generateRandomNumber(),
     },
     {
       name: "ball-2",
@@ -24,25 +23,23 @@ export default function Board({ currentScore, setCurrentScore }) {
     },
   ]);
 
-
-
   for (let i = 1; i <= BOARD_SIZE; i++) {
     board.push(<div key={i} id={i} className={"cell"}></div>);
   }
 
-  function generateRandomNumber(){
+  function generateRandomNumber() {
     let randomNumber = Math.floor(Math.random() * BOARD_SIZE + 1);
     return randomNumber;
   }
 
   function generateRandomBallPosition() {
-    let randomNumber = generateRandomNumber();        
+    let randomNumber = generateRandomNumber();
 
-      for (const ball of balls) {
-        while (ball.position === randomNumber) {
-          randomNumber = generateRandomNumber();
-        }
+    for (const ball of balls) {
+      while (ball.position === randomNumber) {
+        randomNumber = generateRandomNumber();
       }
+    }
     return randomNumber;
   }
 
