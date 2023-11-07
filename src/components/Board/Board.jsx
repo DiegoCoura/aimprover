@@ -6,10 +6,9 @@ import Timer from "../Timer/Timer";
 const BOARD_SIZE = 20;
 
 // eslint-disable-next-line react/prop-types
-export default function Board({ currentScore, setCurrentScore, boardClicks, setBoardClicks }) {
-  let board = [];  
+export default function Board({ currentScore, setCurrentScore, boardClicks, setBoardClicks, accuracy, setAccuracy }) {
+  let board = [];    
   
-  const [accuracy, setAccuracy] = useState(0)
   const [balls, setBalls] = useState([
     {
       name: "ball-0",
@@ -69,7 +68,6 @@ export default function Board({ currentScore, setCurrentScore, boardClicks, setB
   function handleBoardClick(){ 
     setBoardClicks((boardClicks) => boardClicks + 1)
     setAccuracy(()=> Math.round((currentScore * 100) / boardClicks))
-
   }
 
   return (
