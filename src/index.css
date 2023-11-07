@@ -31,6 +31,9 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background: url("./assets/fundo-mais-moderno.jpg") center / cover no-repeat;
+  background-size: 150%;
+  background-repeat: no-repeat;
 }
 
 h1 {
@@ -50,7 +53,6 @@ button {
   transition: border-color 0.25s;
 }
 
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -63,4 +65,3 @@ button {
     background-color: #f9f9f9;
   }
 }
-

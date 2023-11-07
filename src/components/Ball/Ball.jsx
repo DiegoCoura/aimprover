@@ -6,12 +6,14 @@ export default function Ball({ onBallClick, id, index }) {
     onBallClick(id);
   }
 
-  return (
-    <button
-      key={`ball` + index}
-      id={id}
-      className="ball"
-      onClick={handleClick}
-    ></button>
+  return (    
+      <button
+        key={`ball` + index}
+        id={id}
+        className="ball"
+        onClick={handleClick}
+      >        
+      </button>
+    
   );
 }

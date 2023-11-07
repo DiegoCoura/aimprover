@@ -1,13 +1,15 @@
 import "./board.css";
 import Ball from "../Ball/Ball";
 import { useState } from "react";
+import Timer from "../Timer/Timer";
 
 const BOARD_SIZE = 20;
 
 // eslint-disable-next-line react/prop-types
-export default function Board({ currentScore, setCurrentScore }) {
-  let board = [];
-
+export default function Board({ currentScore, setCurrentScore, boardClicks, setBoardClicks }) {
+  let board = [];  
+  
+  const [accuracy, setAccuracy] = useState(0)
   const [balls, setBalls] = useState([
     {
       name: "ball-0",
@@ -53,7 +55,6 @@ export default function Board({ currentScore, setCurrentScore }) {
 
   function onBallClick(id) {
     let newBallPosition = generateRandomBallPosition();
-
     let boardUpdate = [];
     for (const ball of balls) {
       if (ball.name === id) {
@@ -61,14 +62,24 @@ export default function Board({ currentScore, setCurrentScore }) {
       }
       boardUpdate.push(ball);
     }
-    setBalls(() => boardUpdate);
+    setBalls(() => boardUpdate);    
     setCurrentScore(currentScore + 1);
+  }  
+
+  function handleBoardClick(){ 
+    setBoardClicks((boardClicks) => boardClicks + 1)
+    setAccuracy(()=> Math.round((currentScore * 100) / boardClicks))
+
   }
 
   return (
     <>
-      <div className="board">{board}</div>
-      <div>Score: {currentScore}</div>
+      <div className="scoreBoard">
+        <div className="points">Score: {currentScore}</div>
+        <Timer />
+        <div  className="accuracy">{isNaN(accuracy) ? "100%" : accuracy + "%"}</div>
+      </div>
+      <div className="board" onClick={handleBoardClick}>{board}</div>
     </>
   );
 }

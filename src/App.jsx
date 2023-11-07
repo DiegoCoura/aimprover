@@ -7,6 +7,7 @@ const GAME_DURATION = 30000;
 function App() {
   const [playGame, setPlayGame] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
+  const [boardClicks, setBoardClicks] = useState(0)
 
   useEffect(() => {
     if(playGame){
@@ -20,7 +21,7 @@ function App() {
   return (
     <>       
       {playGame ? (
-        <Board setCurrentScore={setCurrentScore} currentScore={currentScore} />
+        <Board setCurrentScore={setCurrentScore} currentScore={currentScore} setBoardClicks={setBoardClicks} boardClicks={boardClicks} />
       ) : (
         <MainMenu setPlayGame={setPlayGame} setCurrentScore={setCurrentScore} currentScore={currentScore} />
       )}
