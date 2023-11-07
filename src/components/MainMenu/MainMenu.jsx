@@ -12,9 +12,10 @@ export default function MainMenu({setPlayGame, currentScore, setCurrentScore}){
 
     return (
         <>
-            <header className="game-title">AIMPROVER</header>
+            <header className="game-title"><img src="/src/assets/title.png"></img></header>
             <div className="menu">
             {currentScore != 0  && <div>Last Score: {currentScore}</div>}
+            <br />
             <button onClick={playGame}>
                 Start
             </button>
