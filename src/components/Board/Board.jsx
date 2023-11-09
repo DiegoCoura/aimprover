@@ -6,9 +6,16 @@ import Timer from "../Timer/Timer";
 const BOARD_SIZE = 20;
 
 // eslint-disable-next-line react/prop-types
-export default function Board({ currentScore, setCurrentScore, boardClicks, setBoardClicks, accuracy, setAccuracy }) {
-  let board = [];    
-  
+export default function Board({
+  currentScore,
+  setCurrentScore,
+  boardClicks,
+  setBoardClicks,
+  accuracy,
+  setAccuracy,
+}) {
+  let board = [];
+
   const [balls, setBalls] = useState([
     {
       name: "ball-0",
@@ -34,20 +41,20 @@ export default function Board({ currentScore, setCurrentScore, boardClicks, setB
   }
 
   function generateRandomBallPosition() {
-    let randomNumber = generateRandomNumber();
+    let newBallPosition = generateRandomNumber();
 
     for (const ball of balls) {
-      while (ball.position === randomNumber) {
-        randomNumber = generateRandomNumber();
+      while (ball.position === newBallPosition) {
+        newBallPosition = generateRandomNumber();
       }
     }
-    return randomNumber;
+    return newBallPosition;
   }
 
-  balls.forEach((ball, index) => {
+  balls.forEach((ball) => {
     board[ball.position - 1] = (
       <div key={ball.position} id={ball.position} className={"cell"}>
-        <Ball index={index} id={ball.name} onBallClick={onBallClick} />
+        <Ball id={ball.name} onBallClick={onBallClick} />
       </div>
     );
   });
@@ -61,13 +68,13 @@ export default function Board({ currentScore, setCurrentScore, boardClicks, setB
       }
       boardUpdate.push(ball);
     }
-    setBalls(() => boardUpdate);    
+    setBalls(() => boardUpdate);
     setCurrentScore(currentScore + 1);
-  }  
+  }
 
-  function handleBoardClick(){ 
-    setBoardClicks((boardClicks) => boardClicks + 1)
-    setAccuracy(()=> Math.round((currentScore * 100) / boardClicks))
+  function handleBoardClick() {
+    setBoardClicks((boardClicks) => boardClicks + 1);
+    setAccuracy(() => Math.round((currentScore * 100) / boardClicks));
   }
 
   return (
@@ -75,9 +82,13 @@ export default function Board({ currentScore, setCurrentScore, boardClicks, setB
       <div className="scoreBoard">
         <div className="points">Score: {currentScore}</div>
         <Timer />
-        <div  className="accuracy">{isNaN(accuracy) ? "100%" : accuracy + "%"}</div>
+        <div className="accuracy">
+          {isNaN(accuracy) ? "100%" : accuracy + "%"}
+        </div>
       </div>
-      <div className="board" onClick={handleBoardClick}>{board}</div>
+      <div className="board" onClick={handleBoardClick}>
+        {board}
+      </div>
     </>
   );
 }
