@@ -14,8 +14,6 @@ function App() {
     if (playGame) {
       const timeout = setTimeout(() => {
         setPlayGame(false);
-        setAccuracy(0);
-        setBoardClicks(0);
       }, GAME_DURATION);
       return () => clearTimeout(timeout);
     }
@@ -25,6 +23,8 @@ function App() {
     setPlayGame(true);
     if (currentScore != 0) {
       setCurrentScore(0);
+      setAccuracy(0);
+      setBoardClicks(0);
     }
   };
 
@@ -42,8 +42,8 @@ function App() {
       ) : (
         <MainMenu
           startGame={startGame}
-          setCurrentScore={setCurrentScore}
           currentScore={currentScore}
+          accuracy={accuracy}
         />
       )}
     </>
