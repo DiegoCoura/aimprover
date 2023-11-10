@@ -1,0 +1,23 @@
+.ball {
+  border-radius: 50%;
+  box-shadow: 8px 4px 13px 3px rgb(0, 0, 0);
+  position: absolute;
+  background-color: transparent;
+  background: url("../../assets/target.png") center / cover no-repeat;
+  cursor: crosshair;
+}
+
+.ball.small{
+  height: 50px;
+  width: 50px;
+}
+
+.ball.medium{
+  height: 70px;
+  width: 70px;
+}
+
+.ball.big{
+  height: 90px;
+  width: 90px;
+}
